@@ -8,73 +8,114 @@ import controller.MethodsStudent;
 
 public class Index {
 
-    //Static array
-    // Student[] listStudents = new Student[100];
-
-    //Dynamic array
-    List<Student> listStudents = new ArrayList<Student>();
-
     Scanner scanner = new Scanner(System.in);
 
+    //Dynamic array
+    Student[] listStudentsStaticArr = new Student[100];
+
+    //Static array
+    List<Student> listStudentsDynamicArray = new ArrayList<Student>();
     public void main(String[] args) {   
 
 
-        MethodsStudent methodsStudent = new MethodsStudent(listStudents);
+
+        MethodsStudent methodsStudent = new MethodsStudent(listStudentsStaticArr, listStudentsDynamicArray);
 
         int yourChoice;
+    
+            do {
+                System.out.println("===================Menu===================");
+                System.out.println("Chọn loại mảng để lưu trữ");
+                System.out.println("1: Mảng tĩnh");
+                System.out.println("2: Mảng động");
+                System.out.println("3: Thoát khỏi chương trình");
+                System.out.println("==========================================");
+                System.out.print("Nhập lựa chọn của bạn: ");
+                yourChoice = scanner.nextInt();
+                System.out.println("==========================================");
+                switch (yourChoice){
+                    case 1:
+                        System.out.println("=============================");
+                        System.out.println("1: Thêm sinh viên");
+                        System.out.println("2: Tìm kiếm sinh viên theo mssv");
+                        System.out.println("3: Cập nhật sinh viên");
+                        System.out.println("4: Xóa sinh viên");
+                        System.out.println("5: Xem danh sách sinh viên");
+                        System.out.println("=============================");
+                        System.out.print("Nhập lựa chọn của bạn : ");
 
-        do {
-            System.out.println("===================Menu===================");
-            System.out.print("Nhập lựa chọn của bạn: ");
-            System.out.println("=============================");
-            System.out.println("1: Thêm sinh viên");
-            System.out.println("2: Tìm kiếm sinh viên theo Id");
-            System.out.println("3: Cập nhật sinh viên");
-            System.out.println("4: Xóa sinh viên");
-            System.out.println("5: Xem danh sách sinh viên");
-            System.out.println("6: Xem phầm trăm học lực");
-            System.out.println("7: Xem phần trăm GPA đã sắp xếp");
-            System.out.println("8: Lấy danh sách sinh viên theo học lực");
-            System.out.println("9: Thoát khỏi chương trình");
-            System.out.println("==========================================");       
-            yourChoice = scanner.nextInt();
-
-            switch (yourChoice) {
-                case 1:
-                    methodsStudent.addStudent();
-                    break;
-                case 2:
-                    methodsStudent.readStudentById();
-                    break;
-                case 3:
-                    methodsStudent.updateStudentById();
-                    break;
-                case 4:
-                    methodsStudent.destroyStudentById();
-                    break;
-                case 5:
-                    methodsStudent.showListStudents();
-                    break;
-                case 6:
-                    methodsStudent.showPercentageOfClassification();
-                    break;
-                case 7:
-                    methodsStudent.PercentCpa();
-                    break;
-                case 8:
-                    methodsStudent.getStudentByClassification();
-                    break;
-                case 9:
-                    System.out.println("Bạn đã chọn thoát khỏi chương trình");
-                    break;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ");
-            }
-        } while (yourChoice != 8);
-
-        methodsStudent.saveStudentsToFile("listStudents");
-        scanner.close();
+                            int n1 = scanner.nextInt();
+                            switch (n1) {
+                                case 1:
+                                    methodsStudent.addStudentStaticArr();
+                                    break;
+                                case 2:
+                                    methodsStudent.readStudentStaticArrById();
+                                    break;
+                                case 3:
+                                    methodsStudent.updateStudentStaticArrById();
+                                    break;
+                                case 4:
+                                    methodsStudent.destroyStudentStaticArrById();
+                                    break;
+                                case 5:
+                                    methodsStudent.showListStudentsStaticArr();
+                                    break;
+                            }
+                            break;
+                    case 2:
+                        System.out.println("=============================");
+                        System.out.println("1: Thêm sinh viên");
+                        System.out.println("2: Tìm kiếm sinh viên theo Id");
+                        System.out.println("3: Cập nhật sinh viên");
+                        System.out.println("4: Xóa sinh viên");
+                        System.out.println("5: Xem danh sách sinh viên");
+                        System.out.println("6: Xem phầm trăm học lực");
+                        System.out.println("7: Xem phần trăm GPA đã sắp xếp");
+                        System.out.println("8: Lấy danh sách sinh viên theo học lực");
+                        System.out.println("=============================");
+                        System.out.print("Nhập lựa chọn của bạn: ");
+                        int n2 = scanner.nextInt();
+                        switch (n2){
+                            case 1:
+                                methodsStudent.addStudentDynamicArr();
+                                break;
+                            case 2:
+                                methodsStudent.readStudentDynamicArrById();
+                                break;
+                            case 3:
+                                methodsStudent.updateStudentDynamicArrById();;
+                                break;
+                            case 4:
+                                methodsStudent.destroyStudentDynamicArrById();;
+                                break;
+                            case 5:
+                                methodsStudent.showListStudentsDynamicArr();;
+                                break;
+                            case 6:
+                                methodsStudent.showPercentageOfClassification();
+                                break;
+                            case 7:
+                                methodsStudent.percentCpa();
+                                break;
+                            case 8:
+                                methodsStudent.getStudentByClassification();
+                                break;
+                        }
+                    case 3:
+                        methodsStudent.saveStudentsDynamicArrToFile("studentsDynamicArr.txt");
+                        methodsStudent.saveStudentsStaticArrToFile("studentsStaticArr.txt");
+                        System.out.println("Danh sách sinh viên đã được lưu. Bạn đã chọn thoát khỏi chương trình.");
+                        break;
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+                }
+            } while (yourChoice != 3);            
+            scanner.close();
     }
+        
+
+    
 } 
        
         

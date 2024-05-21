@@ -180,4 +180,39 @@ public class GetDataInput {
         }
         return idNo;
     }
+
+
+    public String enterIdNoStaticArr(Student[] listStudents){
+        // MethodsStudent methodsStudent = new MethodsStudent(listStudents);
+        
+        String idNo;
+        while (true){
+            System.out.print("Nhập MSSV ( = 10 kí tự): ");
+            idNo = this.scanner.nextLine();
+            Boolean foudIdNo = false;
+            for (Student student : listStudents) {
+                if(student != null){
+                    if (student.getIdNo().equals(idNo)) {
+                        foudIdNo = true;
+                    }else{
+                        foudIdNo = false;
+                    }
+                }else{
+                    foudIdNo = false;
+                }
+            }
+
+            if(idNo.trim().length() == 0){
+                System.out.println("Không được để trống");
+            }else if(!Validate.checkMsv(idNo)){
+                System.out.println("Mã số sinh viên phải có 10 kí tự");
+
+            }else if(foudIdNo == true) {
+                System.out.println("Mã số sinh viên đã tồn tại");
+            }else {
+                break;
+            }
+        }
+        return idNo;
+    }
 }
