@@ -1,4 +1,5 @@
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,18 +7,19 @@ import java.util.Scanner;
 import Model.Student;
 import controller.MethodsStudent;
 
+
 public class Index {
 
-    Scanner scanner = new Scanner(System.in);
-
-    //Dynamic array
-    Student[] listStudentsStaticArr = new Student[100];
-
-    //Static array
-    List<Student> listStudentsDynamicArray = new ArrayList<Student>();
-    public void main(String[] args) {   
+    public static void main(String[] args) {   
 
 
+        Scanner scanner = new Scanner(System.in);
+
+        //Dynamic array
+        Student[] listStudentsStaticArr = new Student[100];
+
+        //Static array
+        List<Student> listStudentsDynamicArray = new ArrayList<Student>();
 
         MethodsStudent methodsStudent = new MethodsStudent(listStudentsStaticArr, listStudentsDynamicArray);
 
@@ -35,17 +37,21 @@ public class Index {
                 System.out.println("==========================================");
                 switch (yourChoice){
                     case 1:
-                        System.out.println("=============================");
-                        System.out.println("1: Thêm sinh viên");
-                        System.out.println("2: Tìm kiếm sinh viên theo mssv");
-                        System.out.println("3: Cập nhật sinh viên");
-                        System.out.println("4: Xóa sinh viên");
-                        System.out.println("5: Xem danh sách sinh viên");
-                        System.out.println("=============================");
-                        System.out.print("Nhập lựa chọn của bạn : ");
+                        int choiceStaticArr;
+                        do{
+                            System.out.println("=============================");
+                            System.out.println("1: Thêm sinh viên");
+                            System.out.println("2: Tìm kiếm sinh viên theo id");
+                            System.out.println("3: Cập nhật sinh viên");
+                            System.out.println("4: Xóa sinh viên");
+                            System.out.println("5: Xem danh sách sinh viên");
+                            System.out.println("6: Thoát khỏi chương trình");
+                            System.out.println("=============================");
+                            System.out.print("Nhập lựa chọn của bạn : ");
 
-                            int n1 = scanner.nextInt();
-                            switch (n1) {
+                            choiceStaticArr= scanner.nextInt();
+                            switch (choiceStaticArr) {
+                                
                                 case 1:
                                     methodsStudent.addStudentStaticArr();
                                     break;
@@ -62,21 +68,25 @@ public class Index {
                                     methodsStudent.showListStudentsStaticArr();
                                     break;
                             }
-                            break;
+                        }while(choiceStaticArr != 6);
+                        break;
                     case 2:
-                        System.out.println("=============================");
-                        System.out.println("1: Thêm sinh viên");
-                        System.out.println("2: Tìm kiếm sinh viên theo Id");
-                        System.out.println("3: Cập nhật sinh viên");
-                        System.out.println("4: Xóa sinh viên");
-                        System.out.println("5: Xem danh sách sinh viên");
-                        System.out.println("6: Xem phầm trăm học lực");
-                        System.out.println("7: Xem phần trăm GPA đã sắp xếp");
-                        System.out.println("8: Lấy danh sách sinh viên theo học lực");
-                        System.out.println("=============================");
-                        System.out.print("Nhập lựa chọn của bạn: ");
-                        int n2 = scanner.nextInt();
-                        switch (n2){
+                        int choiceDynamicArr;
+                        do{
+                            System.out.println("=============================");
+                            System.out.println("1: Thêm sinh viên");
+                            System.out.println("2: Tìm kiếm sinh viên theo Id");
+                            System.out.println("3: Cập nhật sinh viên");
+                            System.out.println("4: Xóa sinh viên");
+                            System.out.println("5: Xem danh sách sinh viên");
+                            System.out.println("6: Xem phầm trăm học lực");
+                            System.out.println("7: Xem phần trăm GPA đã sắp xếp");
+                            System.out.println("8: Lấy danh sách sinh viên theo học lực");
+                            System.out.println("9: Thoát khỏi chương trình");
+                            System.out.println("=============================");
+                            System.out.print("Nhập lựa chọn của bạn: ");
+                            choiceDynamicArr = scanner.nextInt();
+                        switch (choiceDynamicArr){
                             case 1:
                                 methodsStudent.addStudentDynamicArr();
                                 break;
@@ -102,6 +112,8 @@ public class Index {
                                 methodsStudent.getStudentByClassification();
                                 break;
                         }
+                        }while (choiceDynamicArr !=9);
+                        break;                        
                     case 3:
                         methodsStudent.saveStudentsDynamicArrToFile("studentsDynamicArr.txt");
                         methodsStudent.saveStudentsStaticArrToFile("studentsStaticArr.txt");

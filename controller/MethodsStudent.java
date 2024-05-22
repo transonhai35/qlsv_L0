@@ -43,11 +43,11 @@ public class MethodsStudent {
     //method static array
 
     //findstudent
-    public Student findStudentStaticArrById(String idNo){
+    public Student findStudentStaticArrById(String id){
         //find student have id
         for (Student student : this.listStudentsStaticArr) {
             if(student != null){
-                if (student.getIdNo().equals(idNo)) {
+                if (student.getId() == Integer.parseInt(id)) {
                     dataIsInvalid = false;
                     return student;
                 }
@@ -64,11 +64,6 @@ public class MethodsStudent {
     //create
     public void addStudentStaticArr() {
        
-        try {
-            System.out.println("Nhập số lượng sinh viên bạn muốn thêm: ");
-            int n = this.scanner.nextInt();
-            for(int i = 0; i<n ; i++){
-                System.out.println("Nhập thông tin sinh viên thứ " + (i+1));
                 String name = getDataInput.enterName();
                 String idNo = getDataInput.enterIdNoStaticArr(this.listStudentsStaticArr);
                 String address = getDataInput.enterAddress();
@@ -79,31 +74,29 @@ public class MethodsStudent {
                 Double cpa = getDataInput.enterCpa();
                 String yearStart = getDataInput.enterYearStart();
                 // insert new student
-                if (this.listStudentsStaticArr[i] == null) {
-                    listStudentsStaticArr[i] = new Student(
-                        name,
-                        idNo,         
-                        address,
-                        height,
-                        weight,
-                        dateOfBirth,
-                        school,
-                        cpa,
-                        yearStart
-                    );
-                    System.out.println("Đã thêm: " +  listStudentsStaticArr[i]);
-                    return;
-                }
-
-            }
-        }catch (java.util.InputMismatchException e){
-            System.out.println(e);
-        }     
+                for(int i = 0; i< this.listStudentsStaticArr.length; i++){
+                   if(this.listStudentsStaticArr[i] == null) {
+                        listStudentsStaticArr[i] = new Student(
+                            name,
+                            idNo,         
+                            address,
+                            height,
+                            weight,
+                            dateOfBirth,
+                            school,
+                            cpa,
+                            yearStart
+                            );
+                            System.out.println("Đã thêm: " +  listStudentsStaticArr[i]);
+                            return;
+                        }
+               }
+           
     }
     
     //read
     public void readStudentStaticArrById(){
-        System.out.println("Nhập MSSV ( = 10 kí tự): ");
+        System.out.println("Nhập id: ");
         String idNo = this.scanner.nextLine();
 
         //find student have id
@@ -121,12 +114,12 @@ public class MethodsStudent {
     //update
     public void updateStudentStaticArrById() {
 
-        System.out.println("Nhập MSSV ( = 10 kí tự): ");
-        String idNo = this.scanner.nextLine();
+        System.out.println("Nhập id: ");
+        String id = this.scanner.nextLine();
         
         // MethodsStudent methodsStudent = new MethodsStudent(this.listStudents);
 
-        Student foundStudent = this.findStudentStaticArrById(idNo);
+        Student foundStudent = this.findStudentStaticArrById(id);
 
         if (foundStudent != null) {
                 System.out.println("Bạn muốn cập nhật gì? ");
@@ -145,84 +138,66 @@ public class MethodsStudent {
                     case 1:
                         String newName = getDataInput.enterName();
                         // update
-                        for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {        
+                        for (Student student: this.listStudentsStaticArr) {        
                                 student.setName(newName);
                                 break;
-                            }
                         }   
                         break;
                     case 2:
                         String newAddress = getDataInput.enterAddress();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setAdress(newAddress);
                                 break;
-                            }
                         }
                         break;
                     case 3:
                         Double newHeight = getDataInput.enterHeight();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setHeight(newHeight);
                                 break;
-                            }
                         }
                         break;
                     case 4:
                         Double newWeight = getDataInput.enterWeight();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setWeight(newWeight);
                                 break;
-                            }
                         }
                         break;
                     case 5:
                         System.out.print("Nhập MSSV: ");
                         String newIdNo= this.scanner.nextLine();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setIdNo(newIdNo);
                                 break;
-                            }
                         }
                         break;
                     case 6:
                         String newSchool = getDataInput.enterSchool();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setSchool(newSchool);
                                 break;
-                            }
                         }
                         break;
                     case 7:
                         String newYearStart = getDataInput.enterYearStart();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setYearStart(newYearStart);
                                 break;
-                            }
                         }
                         break;
                     case 8:
                         Double newCpa = getDataInput.enterCpa();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setCpa(newCpa);
                                 break;
-                            }
                         }
                         break;
                     case 9:
                         LocalDate newDateOfBirth = getDataInput.enterDateOfBirth();
                         for (Student student: this.listStudentsStaticArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setDateOfBirth(newDateOfBirth);
                                 break;
-                            }
                         }
                         break;
                 }
@@ -231,7 +206,7 @@ public class MethodsStudent {
                 return;
            
         } else {
-            System.out.println("Không tìm thấy sinh viên có: " + idNo);
+            System.out.println("Không tìm thấy sinh viên có: " + id);
         }
     }
 
@@ -241,12 +216,12 @@ public class MethodsStudent {
         boolean found = false;
         int foundIndex = -1;
 
-        System.out.println("Nhập MSSV ( = 10 kí tự): ");
-        String idNo = this.scanner.nextLine();
+        System.out.println("Nhập id: ");
+        String id = this.scanner.nextLine();
     
         // Tìm vị trí của sinh viên trong mảng
         for (int i = 0; i < this.listStudentsStaticArr.length; i++) {
-            if (listStudentsStaticArr[i] != null && listStudentsStaticArr[i].getIdNo().equals(idNo)) {
+            if (listStudentsStaticArr[i] != null && listStudentsStaticArr[i].getIdNo().equals(id)) {
                 found = true;
                 foundIndex = i;
                 break;
@@ -259,9 +234,9 @@ public class MethodsStudent {
             }
             listStudentsStaticArr[listStudentsStaticArr.length - 1] = null;
     
-            System.out.println("Xóa sinh viên có mssv là " + idNo);
+            System.out.println("Xóa sinh viên có mssv là " + id);
         } else {
-            System.out.println("Không tìm thấy sinh viên có mssv là " + idNo );
+            System.out.println("Không tìm thấy sinh viên có mssv là " + id);
         }
     }
 
@@ -269,7 +244,6 @@ public class MethodsStudent {
     public void showListStudentsStaticArr() {
         for (Student student : this.listStudentsStaticArr) {
             if (student != null) {
-                System.out.println("Sinh viên:");
                 System.out.println(student.toString());
             }
         }
@@ -281,17 +255,16 @@ public class MethodsStudent {
     public void showListStudentsDynamicArr() {
         for (Student student : this.listStudentsDynamicArr) {
             if (student != null) {
-                System.out.println("Sinh viên:");
                 System.out.println(student.toString());
             }
         }
     }
 
     //find student by id
-    public Student findStudentDynamicArrById(String idNo){
+    public Student findStudentDynamicArrById(String id){
             //find student have id
             for (Student student : this.listStudentsDynamicArr) {
-                if (student.getIdNo().equals(idNo)) {
+                if (student.getId()== Integer.parseInt(id)) {
                     dataIsInvalid = false;
                     return student;
                 }
@@ -305,11 +278,6 @@ public class MethodsStudent {
     //create
     public void addStudentDynamicArr() {
 
-        try {
-            System.out.println("Nhập số lượng sinh viên bạn muốn thêm: ");
-            int n = this.scanner.nextInt();
-            for(int i = 0; i<n ; i++){
-                System.out.println("Nhập thông tin sinh viên thứ " + (i+1));
                 String name = getDataInput.enterName();
                 String idNo = getDataInput.enterIdNo(this.listStudentsDynamicArr);
                 String address = getDataInput.enterAddress();
@@ -331,23 +299,18 @@ public class MethodsStudent {
                     cpa,
                     yearStart
                 );
-
                 // insert array
                 this.listStudentsDynamicArr.add(newStudent);
-            }
-        }catch (java.util.InputMismatchException e){
-            System.out.println(e);
-        }     
-
+                newStudent.toString();
     }
 
     //read
     public void readStudentDynamicArrById(){
-        System.out.println("Nhập MSSV ( = 10 kí tự): ");
-        String idNo = this.scanner.nextLine();
+        System.out.println("Nhập id: ");
+        String id = this.scanner.nextLine();
 
         //find student have id
-        Student student = this.findStudentDynamicArrById(idNo);
+        Student student = this.findStudentDynamicArrById(id);
 
             if (student != null) {
                 System.out.println(student.toString());
@@ -361,12 +324,12 @@ public class MethodsStudent {
     //update
     public void updateStudentDynamicArrById() {
 
-        System.out.println("Nhập MSSV ( = 10 kí tự): ");
-        String idNo = this.scanner.nextLine();
+        System.out.println("Nhập id: ");
+        String id = this.scanner.nextLine();
         
         // MethodsStudent methodsStudent = new MethodsStudent(this.listStudents);
 
-        Student foundStudent = this.findStudentDynamicArrById(idNo);
+        Student foundStudent = this.findStudentDynamicArrById(id);
 
         if (foundStudent != null) {
                 System.out.println("Bạn muốn cập nhật gì? ");
@@ -386,83 +349,66 @@ public class MethodsStudent {
                         String newName = getDataInput.enterName();
                         // update
                     for (Student student: this.listStudentsDynamicArr) {
-                        if (student.getIdNo() == idNo) {
                             student.setName(newName);
                             break;
-                        }
                     }
                         break;
                     case 2:
                         String newAddress = getDataInput.enterAddress();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setAdress(newAddress);
                                 break;
-                            }
                         }
                         break;
                     case 3:
                         Double newHeight = getDataInput.enterHeight();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setHeight(newHeight);
                                 break;
-                            }
                         }
                         break;
                     case 4:
                         Double newWeight = getDataInput.enterWeight();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setWeight(newWeight);
                                 break;
-                            }
                         }
                         break;
                     case 5:
                         System.out.print("Nhập MSSV: ");
-                        String newIdNo= this.scanner.nextLine();
+                        String newIdNo= getDataInput.enterIdNo(listStudentsDynamicArr);
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setIdNo(newIdNo);
                                 break;
-                            }
                         }
                         break;
                     case 6:
                         String newSchool = getDataInput.enterSchool();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setSchool(newSchool);
                                 break;
-                            }
                         }
                         break;
                     case 7:
                         String newYearStart = getDataInput.enterYearStart();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setYearStart(newYearStart);
                                 break;
-                            }
                         }
                         break;
                     case 8:
                         Double newCpa = getDataInput.enterCpa();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setCpa(newCpa);
+                                student.updateClassification();
                                 break;
-                            }
                         }
                         break;
                     case 9:
                         LocalDate newDateOfBirth = getDataInput.enterDateOfBirth();
                         for (Student student: this.listStudentsDynamicArr) {
-                            if (student.getIdNo() == idNo) {
                                 student.setDateOfBirth(newDateOfBirth);
                                 break;
-                            }
                         }
                         break;
                 }
@@ -471,25 +417,25 @@ public class MethodsStudent {
                 return;
            
         } else {
-            System.out.println("Không tìm thấy sinh viên có: " + idNo);
+            System.out.println("Không tìm thấy sinh viên có: " + id);
         }
     }
 
     //delete
     public void destroyStudentDynamicArrById() {
         
-        System.out.println("Nhập MSSV ( = 10 kí tự): ");
-        String idNo = this.scanner.nextLine();
+        System.out.println("Nhập id: ");
+        String id = this.scanner.nextLine();
 
 
-        Student foundStudent = this.findStudentDynamicArrById(idNo);
+        Student foundStudent = this.findStudentDynamicArrById(id);
     
          // found student
          if (foundStudent != null) {
             this.listStudentsDynamicArr.remove(foundStudent);
-            System.out.println("Đã xóa sinh viên có ID " + idNo);
+            System.out.println("Đã xóa sinh viên có ID " + id);
         } else {
-            System.out.println("Không tìm thấy sinh viên có ID " + idNo + " trong danh sách");
+            System.out.println("Không tìm thấy sinh viên có ID " + id + " trong danh sách");
         }
     }
 

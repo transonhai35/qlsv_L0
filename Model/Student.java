@@ -90,7 +90,7 @@ public class Student extends Human {
         return classification;
     } 
 
-    private void updateClassification(){
+    public void updateClassification(){
         Map<Double, Classification> classificationMap = ClassificationConst.CLASSIFICATION_CONST_MAP;
         for (Map.Entry<Double, Classification> entry : classificationMap.entrySet()) {
             if (cpa >= entry.getKey()) {
@@ -101,9 +101,9 @@ public class Student extends Human {
 
     //@Override 
     public String toString() {
-        return "Học sinh:" +
+        return "Sinh viên:" + this.getName() +
                 "ID '" + this.getId() + "', " +
-                "MSSV: '" + this.getName() +"', " +
+                "MSSV: '" + this.getIdNo() +"', " +
                 "ngày sinh: '" + this.getDateOfBirth() + "', " +
                 "địa chỉ: '" + this.getAddress() +"', " +
                 "chiều cao: '" + this.getHeight() +"', " +

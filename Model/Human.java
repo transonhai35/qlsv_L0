@@ -72,4 +72,14 @@ class Human {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    //@Override 
+    public String toString() {
+        return "Sinh viên:" + this.getName() +
+                "ID '" + this.getId() + "', " +
+                "ngày sinh: '" + this.getDateOfBirth() + "', " +
+                "địa chỉ: '" + this.getAddress() +"', " +
+                "chiều cao: '" + this.getHeight() +"', " +
+                "cân mặng: '" + this.getWeight() ;
+    }
 }

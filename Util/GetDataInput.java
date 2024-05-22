@@ -1,7 +1,10 @@
 package Util;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import Model.Student;
@@ -151,6 +154,17 @@ public class GetDataInput {
         return startYear;
     }
 
+    
+    public boolean hasDuplicates(String value) {
+        HashSet<Character> set = new HashSet<>();
+        for (char val : value.toCharArray()) {
+            if (!set.add(val)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public String enterIdNo(List<Student> listStudents){
         // MethodsStudent methodsStudent = new MethodsStudent(listStudents);
         
@@ -171,16 +185,16 @@ public class GetDataInput {
                 System.out.println("Không được để trống");
             }else if(!Validate.checkMsv(idNo)){
                 System.out.println("Mã số sinh viên phải có 10 kí tự");
-
             }else if(foudIdNo == true) {
                 System.out.println("Mã số sinh viên đã tồn tại");
+            }else if(this.hasDuplicates(idNo) == true){
+                System.out.println("Mã số sinh viên có kí tự bị trùng");
             }else {
                 break;
             }
         }
         return idNo;
     }
-
 
     public String enterIdNoStaticArr(Student[] listStudents){
         // MethodsStudent methodsStudent = new MethodsStudent(listStudents);
@@ -206,9 +220,10 @@ public class GetDataInput {
                 System.out.println("Không được để trống");
             }else if(!Validate.checkMsv(idNo)){
                 System.out.println("Mã số sinh viên phải có 10 kí tự");
-
             }else if(foudIdNo == true) {
                 System.out.println("Mã số sinh viên đã tồn tại");
+            }else if(this.hasDuplicates(idNo) == true){
+                System.out.println("Mã số sinh viên có kí tự bị trùng");
             }else {
                 break;
             }
