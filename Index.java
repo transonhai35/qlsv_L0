@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Model.Student;
 import controller.MethodsStudent;
+import Model.Student;
 
 
 public class Index {

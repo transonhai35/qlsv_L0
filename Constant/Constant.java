@@ -7,7 +7,7 @@ public class Constant {
     public static final int MAX_LENGTH_ADDRESS = 300;
     public static final int NUMBER_OF_CHARACTERS_ID_NO = 10;
     public static final int MAX_LENGHT_SCHOOL_NAME = 200;
-    public static final int NUMBER_OF_CHARACTERS_START_YEARS = 4;
+    public static final int NUMBER_OF_CHARACTERS_START_YEARS = 1900;
     public static final double MIN_HEIGHT = 50.0d;
     public static final double MAX_HEIGHT = 300.0d;
     public static final double MIN_WEIGHT = 5.0d;

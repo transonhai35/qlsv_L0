@@ -75,7 +75,7 @@ class Human {
 
     //@Override 
     public String toString() {
-        return "Sinh viên:" + this.getName() +
+        return "Sinh viên:" + this.getName() +"', " +
                 "ID '" + this.getId() + "', " +
                 "ngày sinh: '" + this.getDateOfBirth() + "', " +
                 "địa chỉ: '" + this.getAddress() +"', " +

@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ public class MethodsStudent {
     private Student[] listStudentsStaticArr = new Student[100];
 
     private List<Student> listStudentsDynamicArr = new ArrayList<Student>();
+
+    private Classification classification;
 
     private static final String FILE_PATH = "QLSV.iml";
 
@@ -96,11 +99,10 @@ public class MethodsStudent {
     
     //read
     public void readStudentStaticArrById(){
-        System.out.println("Nhập id: ");
-        String idNo = this.scanner.nextLine();
+        String id = getDataInput.enterId();
 
         //find student have id
-        Student student = this.findStudentStaticArrById(idNo);
+        Student student = this.findStudentStaticArrById(id);
 
             if (student != null) {
                 System.out.println(student.toString());
@@ -114,8 +116,7 @@ public class MethodsStudent {
     //update
     public void updateStudentStaticArrById() {
 
-        System.out.println("Nhập id: ");
-        String id = this.scanner.nextLine();
+        String id = getDataInput.enterId();
         
         // MethodsStudent methodsStudent = new MethodsStudent(this.listStudents);
 
@@ -215,28 +216,35 @@ public class MethodsStudent {
         
         boolean found = false;
         int foundIndex = -1;
+        int currentIndex = 0;
+        // Student destroyStudent = new Student(null, null,null,0,0,null,null,0,null);
 
-        System.out.println("Nhập id: ");
-        String id = this.scanner.nextLine();
+        String id = getDataInput.enterId();
     
         // Tìm vị trí của sinh viên trong mảng
         for (int i = 0; i < this.listStudentsStaticArr.length; i++) {
-            if (listStudentsStaticArr[i] != null && listStudentsStaticArr[i].getIdNo().equals(id)) {
+            if (listStudentsStaticArr[i] != null && listStudentsStaticArr[i].getId() ==  Integer.parseInt(id)) {
                 found = true;
                 foundIndex = i;
+                listStudentsStaticArr[i] = null;
                 break;
             }
         }
     
         if (found) {
             for (int i = foundIndex; i < this.listStudentsStaticArr.length - 1; i++) {
-                listStudentsStaticArr[i] = listStudentsStaticArr[i + 1];
+                if (listStudentsStaticArr[i] != null) {
+                    listStudentsStaticArr[currentIndex++] = listStudentsStaticArr[i];
+                }
             }
-            listStudentsStaticArr[listStudentsStaticArr.length - 1] = null;
-    
-            System.out.println("Xóa sinh viên có mssv là " + id);
+            while (currentIndex < this.listStudentsStaticArr.length) {
+                this.listStudentsStaticArr[currentIndex++] = null;
+            }
+        
+            System.out.println("Xóa sinh viên: ");
+            this.showListStudentsStaticArr();
         } else {
-            System.out.println("Không tìm thấy sinh viên có mssv là " + id);
+            System.out.println("Không tìm thấy sinh viên có id   là " + id);
         }
     }
 
@@ -247,6 +255,7 @@ public class MethodsStudent {
                 System.out.println(student.toString());
             }
         }
+
     }
 
     // method dynamic array
@@ -306,8 +315,7 @@ public class MethodsStudent {
 
     //read
     public void readStudentDynamicArrById(){
-        System.out.println("Nhập id: ");
-        String id = this.scanner.nextLine();
+        String id = getDataInput.enterId();
 
         //find student have id
         Student student = this.findStudentDynamicArrById(id);
@@ -324,8 +332,7 @@ public class MethodsStudent {
     //update
     public void updateStudentDynamicArrById() {
 
-        System.out.println("Nhập id: ");
-        String id = this.scanner.nextLine();
+        String id = getDataInput.enterId();
         
         // MethodsStudent methodsStudent = new MethodsStudent(this.listStudents);
 
@@ -424,8 +431,7 @@ public class MethodsStudent {
     //delete
     public void destroyStudentDynamicArrById() {
         
-        System.out.println("Nhập id: ");
-        String id = this.scanner.nextLine();
+        String id = getDataInput.enterId();
 
 
         Student foundStudent = this.findStudentDynamicArrById(id);
@@ -433,7 +439,7 @@ public class MethodsStudent {
          // found student
          if (foundStudent != null) {
             this.listStudentsDynamicArr.remove(foundStudent);
-            System.out.println("Đã xóa sinh viên có ID " + id);
+            this.listStudentsDynamicArr.toString();
         } else {
             System.out.println("Không tìm thấy sinh viên có ID " + id + " trong danh sách");
         }
@@ -441,6 +447,16 @@ public class MethodsStudent {
 
 
     public void showPercentageOfClassification() {
+
+        Map<Classification, String> percentageOfClassificationMap = new HashMap<>();
+    
+        percentageOfClassificationMap.put(Classification.POOR, "0%");
+        percentageOfClassificationMap.put(Classification.WEAK, "0%");
+        percentageOfClassificationMap.put(Classification.AVERAGE, "0%");
+        percentageOfClassificationMap.put(Classification.GOOD, "0%");
+        percentageOfClassificationMap.put(Classification.VERY_GOOD, "0%");
+        percentageOfClassificationMap.put(Classification.EXCELLENT, "0%");
+    
         Map<Classification, Integer> classificationCounts = new HashMap<>();
     
         for (Student student : this.listStudentsDynamicArr) {
@@ -451,10 +467,18 @@ public class MethodsStudent {
     
         System.out.println("Phần trăm học lực:");
         for (Map.Entry<Classification, Integer> entry : classificationCounts.entrySet()) {
-            double percentage = (double) entry.getValue() / totalStudents * 100;
-            System.out.println(entry.getKey() + ": " + percentage + "%");
+            Classification classification = entry.getKey();
+            int count = entry.getValue();
+            double percentage = (double) count / totalStudents * 100;
+            percentageOfClassificationMap.put(classification, String.format("%.2f%%", percentage)); // Update percentages in the map
+        }
+    
+        // Display percentages
+        for (Map.Entry<Classification, String> entry : percentageOfClassificationMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
+    
 
     //PercentClassification
     public void percentCpa() {

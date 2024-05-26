@@ -101,7 +101,7 @@ public class Student extends Human {
 
     //@Override 
     public String toString() {
-        return "Sinh viên:" + this.getName() +
+        return "Sinh viên:" + this.getName() + "', " +
                 "ID '" + this.getId() + "', " +
                 "MSSV: '" + this.getIdNo() +"', " +
                 "ngày sinh: '" + this.getDateOfBirth() + "', " +

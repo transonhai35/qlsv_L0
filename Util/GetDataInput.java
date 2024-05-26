@@ -23,8 +23,10 @@ public class GetDataInput {
             name = this.scanner.nextLine();
             if (Validate.checkLenghtName(name)) {
                 System.out.println("Bạn chỉ được nhập tên tối đa 100 kí tự");
-            } else if(name.length() == 0){
+            } else if(name.replaceAll("\\s", "").length() == 0){
                 System.out.println("Bạn không được để trống tên");
+            }else if (name.matches(".*\\d.*")) {
+                System.out.println("Tên không được chứa số");
             }else  {
                 break;      
             }
@@ -146,7 +148,7 @@ public class GetDataInput {
             if(startYear.trim().length() == 0){
                 System.out.println("Không được để trống");
             }else if(!Validate.checkStartYear(startYear)){
-                System.out.println("phải có 4 kí tự");
+                System.out.println("Năm băt đầu phải sau năm 1900");
             }else {
                 break;
             }
@@ -155,6 +157,24 @@ public class GetDataInput {
     }
 
     
+    public String enterId(){
+        // MethodsStudent methodsStudent = new MethodsStudent(listStudents);
+        
+        String id;
+        while (true){
+            System.out.print("Nhập id: ");
+            id = this.scanner.nextLine();
+            
+
+            if(id.trim().length() == 0){
+                System.out.println("Không được để trống");
+            }else {
+                break;
+            }
+        }
+        return id;
+    }
+
     public boolean hasDuplicates(String value) {
         HashSet<Character> set = new HashSet<>();
         for (char val : value.toCharArray()) {

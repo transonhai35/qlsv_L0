@@ -37,7 +37,7 @@ public class Validate {
     }
 
     public static Boolean checkStartYear(String startYear){
-        return startYear.length() == Constant.NUMBER_OF_CHARACTERS_START_YEARS;
+        return Integer.parseInt(startYear) >= Constant.NUMBER_OF_CHARACTERS_START_YEARS;
     }
 
     public static Boolean checkCpa(Double cpa) {
